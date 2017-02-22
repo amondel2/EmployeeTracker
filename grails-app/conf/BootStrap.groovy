@@ -57,14 +57,6 @@ class BootStrap {
         }
 
         try{
-            e = new Employee(firstName:"Britt",lastName:"Binler")
-            e.save()
-            employeeList.add(e)
-        } catch(Exception ex) {
-            employeeList.add(Employee.findByFirstNameAndLastName("Britt","Binler"))
-        }
-
-        try{
             e = new Employee(firstName:"Amar",lastName:"Shah")
             e.save()
             employeeList.add(e)
