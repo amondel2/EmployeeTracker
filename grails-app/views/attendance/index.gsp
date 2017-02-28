@@ -16,7 +16,8 @@
     <body>
         <form method="POST">
             <div>
-                <label for="month">Select Month</label><g:select name="month" from="${0..11}" value="${month}" />
+                <label for="month">Select Month</label><g:select name="month" optionKey="id" optionValue="test"
+                from="${monthList}" value="${month}" />
                 <label for="day">Select Day</label><g:select name="day" from="${1..31}" value="${day}" />
                 <label for="month">Select Year</label><g:select name="year" from="${2017..2018}" value="${year}" />
                 <input type="submit">
