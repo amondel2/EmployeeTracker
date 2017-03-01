@@ -113,6 +113,8 @@ class EmployeeDay implements Serializable {
     }
 
     static mapping = {
+        day cascade: "none"
+        emp cascade: "none"
         id composite: ['day', 'emp']
         version false
     }
