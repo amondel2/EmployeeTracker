@@ -1,7 +1,7 @@
 /* FONT STACK */
 body,
 input, select, textarea {
-    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-family: "Open Sans", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -14,7 +14,7 @@ html {
     background-color: #ddd;
     background-image: -moz-linear-gradient(center top, #aaa, #ddd);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #aaa), color-stop(1, #ddd));
-    background-image: linear-gradient(top, #aaa, #ddd);
+    background-image: linear-gradient(to bottom, #aaa, #ddd);
     filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#aaaaaa', EndColorStr = '#dddddd');
     background-repeat: no-repeat;
     height: 100%;
@@ -28,55 +28,35 @@ html.no-cssgradients {
     background-color: #aaa;
 }
 
-.ie6 html {
-    height: 100%;
-}
-
 html * {
     margin: 0;
 }
-b
+
 body {
-    background: #ffffff;
+    background-color: #F5F5F5;
     color: #333333;
-    margin: 0 auto;
-    max-width: 1500px;
-    overflow-x: auto; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
-    -moz-box-shadow: 0 0 0.3em #255b17;
-    -webkit-box-shadow: 0 0 0.3em #255b17;
-    box-shadow: 0 0 0.3em #255b17;
+    overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
+    -moz-box-shadow: 0 0 0.3em #424649;
+    -webkit-box-shadow: 0 0 0.3em #424649;
+    box-shadow: 0 0 0.3em #424649;
 }
 
 #grailsLogo {
-    background-color: #abbf78;
-}
-
-/* replace with .no-boxshadow body if you have modernizr available */
-.ie6 body,
-.ie7 body,
-.ie8 body {
-    border-color: #255b17;
-    border-style: solid;
-    border-width: 0 1px;
-}
-
-.ie6 body {
-    height: 100%;
-}
-
-a:link, a:visited, a:hover {
-    color: #48802c;
+    background-color: #feb672;
 }
 
 a:hover, a:active {
     outline: none; /* prevents outline in webkit on active links but retains it for tab focus */
 }
 
-h1 {
-    color: #48802c;
+h1, h2, h3 {
     font-weight: normal;
     font-size: 1.25em;
     margin: 0.8em 0 0.3em 0;
+}
+
+ul {
+    padding: 0;
 }
 
 img {
@@ -103,18 +83,32 @@ img {
     border: none;
 }
 
+.footer img {
+    height: 80px;
+    margin-right: 25px;
+    margin-bottom: 15px;
+    clear: bottom;
+}
+
+.footer strong a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
 .footer {
-    background: #abbf78;
-    color: #000;
+    background: #424649;
+    color: #ffffff;
     clear: both;
-    font-size: 0.8em;
+    font-size: 1em;
     margin-top: 1.5em;
     padding: 1em;
+    padding-bottom: 2em;
     min-height: 1em;
 }
 
 .footer a {
-    color: #255b17;
+    color: #feb672;
 }
 
 .spinner {
@@ -131,11 +125,6 @@ img {
 /* NAVIGATION MENU */
 
 .nav {
-    background-color: #efefef;
-    padding: 0.5em 0.75em;
-    -moz-box-shadow: 0 0 3px 1px #aaaaaa;
-    -webkit-box-shadow: 0 0 3px 1px #aaaaaa;
-    box-shadow: 0 0 3px 1px #aaaaaa;
     zoom: 1;
 }
 
@@ -161,6 +150,12 @@ img {
     -moz-border-radius: 0.3em;
     -webkit-border-radius: 0.3em;
     border-radius: 0.3em;
+}
+
+.nav li.dropdown-item a {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
 }
 
 .nav a:active, .nav a:visited {
@@ -196,6 +191,10 @@ img {
 
 .nav a.create {
     background-image: url(../images/skin/database_add.png);
+}
+
+.nav li.dropdown.show ul.dropdown-menu {
+    background-color: #424649;
 }
 
 /* CREATE/EDIT FORMS AND SHOW PAGES */
@@ -279,7 +278,7 @@ input:focus, select:focus, textarea:focus {
 }
 
 .required-indicator {
-    color: #48802C;
+    color: #cc0000;
     display: inline-block;
     font-weight: bold;
     margin-left: 0.3em;
@@ -291,11 +290,6 @@ ul.one-to-many {
     display: inline-block;
     list-style-position: inside;
     vertical-align: top;
-}
-
-.ie6 ul.one-to-many, .ie7 ul.one-to-many {
-    display: inline;
-    zoom: 1;
 }
 
 ul.one-to-many li.add {
@@ -472,14 +466,14 @@ th.desc a {
 }
 
 th:hover, tr:hover {
-    background: #E1F2B6;
+    background: #f5f5f5;
 }
 
 /* PAGINATION */
 
 .pagination {
     border-top: 0;
-    margin: 0;
+    margin: 0.8em 1em 0.3em;
     padding: 0.3em 0.2em;
     text-align: center;
     -moz-box-shadow: 0 0 3px 1px #AAAAAA;
@@ -569,11 +563,6 @@ th:hover, tr:hover {
     text-indent: 25px;
 }
 
-.ie6 .buttons input.delete, .ie6 .buttons input.edit, .ie6 .buttons input.save,
-.ie7 .buttons input.delete, .ie7 .buttons input.edit, .ie7 .buttons input.save {
-    padding-left: 36px;
-}
-
 .buttons .delete {
     background-image: url(../images/skin/database_delete.png);
 }
@@ -591,7 +580,15 @@ a.skip {
     left: -9999px;
 }
 
-a.skip:focus, a.skip:active {
-    position: relative;
-    left: 0px;
+.grails-logo-container {
+    background: #7c7c7c no-repeat 50% 30%;
+    margin-bottom: 20px;
+    color: white;
+    height:300px;
+    text-align:center;
+}
+
+img.grails-logo {
+    height:340px;
+    margin-top:-10px;
 }

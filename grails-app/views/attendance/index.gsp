@@ -19,15 +19,15 @@
                 <label for="month">Select Month</label><g:select name="month" optionKey="id" optionValue="test"
                 from="${monthList}" value="${month}" />
                 <label for="day">Select Day</label><g:select name="day" from="${1..31}" value="${day}" />
-                <label for="month">Select Year</label><g:select name="year" from="${2017..2018}" value="${year}" />
+                <label for="month">Select Year</label><g:select name="year" from="${2017..2019}" value="${year}" />
                 <input type="submit">
             </div>
         </form>
         <div id="empdList">
             <g:each in="${empList}" var='empd'>
                 <div>
-                    <label id="${empd.ident}" for="workType_${empd.ident}">Select Attendance for ${empd.emp.toString()}:</label>
-                    <g:select from="${WorkType}" name="workType_${empd.ident}" value="${empd.type}" />
+                    <label id="${empd.id}" for="workType_${empd.id}">Select Attendance for ${empd.emp.toString()}:</label>
+                    <g:select from="${WorkType}" name="workType_${empd.id}" value="${empd.type}" />
 
                 </div>
             </g:each>

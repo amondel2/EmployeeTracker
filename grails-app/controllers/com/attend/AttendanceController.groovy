@@ -25,7 +25,7 @@ class AttendanceController {
         def slurper = new JsonSlurper()
         def result = slurper.parseText(params.empList)
         result?.each{k, v ->
-            def emd = EmployeeDay.findByIdent(k)
+            def emd = EmployeeDay.load(k)
             def success = true
             def msg = "SUCCESS"
             try{
