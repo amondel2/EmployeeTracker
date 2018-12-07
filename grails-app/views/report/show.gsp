@@ -12,6 +12,11 @@
         <meta name="layout" content="main_1"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Show</title>
+        <style type="text/css">
+            ul {
+                padding-left: 40px;
+            }
+        </style>
     </head>
     <body>
         <h1>${emp.toString()} </h1>

@@ -1,7 +1,9 @@
 package com.attend
 
 import grails.converters.JSON
+import grails.plugin.springsecurity.annotation.Secured
 
+@Secured(["ROLE_ADMIN"])
 class EmployeeDayController {
 
     static scaffold=EmployeeDay

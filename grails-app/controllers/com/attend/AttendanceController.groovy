@@ -2,7 +2,9 @@ package com.attend
 
 import grails.converters.JSON
 import groovy.json.JsonSlurper
+import grails.plugin.springsecurity.annotation.Secured
 
+@Secured(["ROLE_ADMIN"])
 class AttendanceController {
 
     def index() {
