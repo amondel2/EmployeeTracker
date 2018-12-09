@@ -27,20 +27,22 @@ class BootStrap {
         UserRole ur = UserRole.findOrCreateByUserAndRole(u,r)
         ur.save(flush:true)
 
-        def empList = System.getenv("emtrack_empList")?.toString() ?: System.getProperty("emtrack_empList")?.toString() ?: ''
+        def empList = System.getenv("emtrack_empList")?.toString() ?: ( System.getProperty("emtrack_empList")?.toString() ?: '')
         def e
         def employeeList = []
-        empList.split(':').each{
-            def s = it.split(',')
-            try{
-                e = new Employee(firstName:s[0],lastName:s[1])
-                e.save()
-                employeeList.add(e)
-            } catch(Exception ex) {
-                employeeList.add(Employee.findByFirstNameAndLastName(s[0],s[1]))
+        try {
+            empList?.split(':')?.each {
+                try {
+                    def s = it?.split(',')
+                    e = new Employee(firstName: s[0], lastName: s[1])
+                    e.save()
+                    employeeList.add(e)
+                } catch (Exception ex) {   }
             }
+        } catch(Exception e2) {}
+        if(employeeList?.size() > 0 ) {
+            employeeService.createYear(2017)
         }
-        employeeService.createYear(2017)
 
     }
     def destroy = {
