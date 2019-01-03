@@ -6,6 +6,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class ReportController {
 
     def index() {
+        def yearf = params.year ?  new GregorianCalendar( params.year.toInteger(),0,1,0,0,0).getTime() :null
 
         def data = [:]
         def idToName = [:]
@@ -15,24 +16,31 @@ class ReportController {
             wts.add(wt)
             emps.each{ emp ->
                 idToName[emp.id] = emp.toString()
-                def s  = EmployeeDay.countByEmpAndType(emp,wt)
-                //                empNums.add(new Report(wt,s))
+                def criteria = EmployeeDay.createCriteria()
+                def s = criteria.list {
+                    projections {
+                        count()
+                    }
+                    eq ('emp', emp)
+                    eq ('type', wt)
+                    if(yearf) {
+                        day{
+                           gte('myday',yearf)
+                        }
+                    }
+                }
 
                 if(!data[emp.id]){
                     data[emp.id] = []
                 }
-                data[emp.id].add(s)
+                data[emp.id].add(s[0])
             }
         }
-        //        withFormat{
-        //            "*"{
-        //                render(data as JSON)
-        //            }
-        //        }
         render(view:'index',model:[data:data,wts:wts,idToName:idToName])
     }
 
     def show() {
+        def yearf = params.year ?  new GregorianCalendar( params.year.toInteger(),0,1,0,0,0).getTime() :null
         def emp = Employee.load(params.id)
         def wts = [:]
         def nom_normal = 0
@@ -41,13 +49,34 @@ class ReportController {
             def name = wt.toString()
             if(wt != WorkType.Normal) {
                 def data = []
-                EmployeeDay.findAllByEmpAndType(emp,wt).each{ s ->
+                EmployeeDay.withCriteria {
+                    eq ('emp', emp)
+                    eq ('type', wt)
+                    if(yearf) {
+                        day{
+                            gte('myday',yearf)
+                        }
+                    }
+                }?.each{ s ->
                     data.add(s?.day?.myday)
                     non_normie++
                 }
                 wts[name] = data
             } else {
-                nom_normal = EmployeeDay.countByEmpAndType(emp,wt)
+                def criteria = EmployeeDay.createCriteria()
+                def s = criteria.list {
+                    projections {
+                        count()
+                    }
+                    eq ('emp', emp)
+                    eq ('type', wt)
+                    if(yearf) {
+                        day{
+                            gte('myday',yearf)
+                        }
+                    }
+                }
+                nom_normal = s[0]
             }
         }
         render(view:'show',model:[wts:wts,emp:emp,nom_normal:nom_normal,non_normie:non_normie])

@@ -10,7 +10,7 @@ buildscript {
     }
 }
 
-version "0.2"
+version "0.3"
 group "EmployeeTrack"
 
 apply plugin:"eclipse"
@@ -69,6 +69,13 @@ bootRun {
     systemProperty springProfilesActive, System.getProperty(springProfilesActive)
 }
 
+tasks.withType(War) {
+    doLast {
+        exec {
+            executable './release.sh'
+        }
+    }
+}
 
 assets {
     minifyJs = true

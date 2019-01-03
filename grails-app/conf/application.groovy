@@ -30,7 +30,7 @@ environments {
     }
     production{
         dataSource {
-            dbCreate = "none"
+            dbCreate = "update"
             username = user
             password = pass
             dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
@@ -88,3 +88,4 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 	[pattern: '/**',             filters: 'JOINED_FILTERS']
 ]
 
+server.contextPath='/EMT'
