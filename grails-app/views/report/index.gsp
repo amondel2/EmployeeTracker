@@ -14,6 +14,17 @@
         <title>Index</title>
     </head>
     <body>
+         <form method="GET">
+            <select name="year">
+                <option value="" <g:if test="${currYear != yearS}">selected="selected"</g:if>>All</option>
+                <option value="${yearS -2}">${yearS -2}</option>
+                <option value="${yearS -1}">${yearS -1}</option>
+                <option value="${yearS}" <g:if test="${currYear?.toString() == yearS?.toString()}">selected="selected"</g:if>>${yearS}</option>
+                <option value="${yearS +1}">${yearS + 1}</option>
+                <option value="${yearS +2}">${yearS + 2}</option>
+            </select>
+            <button id="goBtn" onclick="document.getElementsByTagName('form')[0].submit()">Submit</button>
+         </form>
         <table>
             <thead>
             <th>Name</th>

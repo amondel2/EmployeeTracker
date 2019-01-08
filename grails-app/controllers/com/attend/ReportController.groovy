@@ -2,6 +2,8 @@ package com.attend
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
+
+
 @Secured(["ROLE_ADMIN"])
 class ReportController {
 
@@ -36,7 +38,11 @@ class ReportController {
                 data[emp.id].add(s[0])
             }
         }
-        render(view:'index',model:[data:data,wts:wts,idToName:idToName])
+        GregorianCalendar cal = GregorianCalendar.getInstance()
+        if(yearf instanceof Date) {
+            cal.setTime(yearf)
+        }
+        render(view:'index',model:[data:data,wts:wts,idToName:idToName,yearS:cal.get(Calendar.YEAR), currYear:params.year])
     }
 
     def show() {
@@ -79,6 +85,10 @@ class ReportController {
                 nom_normal = s[0]
             }
         }
-        render(view:'show',model:[wts:wts,emp:emp,nom_normal:nom_normal,non_normie:non_normie])
+        GregorianCalendar cal = GregorianCalendar.getInstance()
+        if(yearf instanceof Date) {
+            cal.setTime(yearf)
+        }
+        render(view:'show',model:[wts:wts,emp:emp,nom_normal:nom_normal,non_normie:non_normie,yearS:cal.get(Calendar.YEAR), currYear:params.year])
     }
 }
