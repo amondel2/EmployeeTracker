@@ -1,6 +1,8 @@
 #!/bin/bash
 sftp aaron@40.121.35.212 <<End-Of-Session
 cd war
+sudo su
+rm -Rf /home/aaron/war/*.war
 put /home/aaron/IdeaProjects/EmployeeTracker/build/libs/*.war
 exit
 End-Of-Session
