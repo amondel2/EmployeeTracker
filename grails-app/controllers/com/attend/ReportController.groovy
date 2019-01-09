@@ -2,14 +2,12 @@ package com.attend
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
 
-
-
 @Secured(["ROLE_ADMIN"])
 class ReportController {
 
     def index() {
         def yearf = params.year ?  new GregorianCalendar( params.year.toInteger(),0,1,0,0,0).getTime() :null
-
+        def endDate = yearf ? new GregorianCalendar( params.year.toInteger(),11,31,23,59,59).getTime() : null
         def data = [:]
         def idToName = [:]
         def wts = []
@@ -27,7 +25,7 @@ class ReportController {
                     eq ('type', wt)
                     if(yearf) {
                         day{
-                           gte('myday',yearf)
+                            between('myday',yearf,endDate  )
                         }
                     }
                 }
@@ -47,6 +45,7 @@ class ReportController {
 
     def show() {
         def yearf = params.year ?  new GregorianCalendar( params.year.toInteger(),0,1,0,0,0).getTime() :null
+        def endDate = yearf ? new GregorianCalendar( params.year.toInteger(),11,31,23,59,59).getTime() : null
         def emp = Employee.load(params.id)
         def wts = [:]
         def nom_normal = 0
@@ -60,7 +59,7 @@ class ReportController {
                     eq ('type', wt)
                     if(yearf) {
                         day{
-                            gte('myday',yearf)
+                            between('myday',yearf,endDate)
                         }
                     }
                 }?.each{ s ->
@@ -78,7 +77,7 @@ class ReportController {
                     eq ('type', wt)
                     if(yearf) {
                         day{
-                            gte('myday',yearf)
+                            between('myday',yearf, endDate)
                         }
                     }
                 }
