@@ -20,6 +20,7 @@
     </head>
     <body>
     <form method="GET">
+        <input name="week" value="${week}" class="datepicker" data-date-format="mm/dd/yyyy">
         <select name="year">
             <option value="" <g:if test="${currYear != yearS}">selected="selected"</g:if>>All</option>
             <option value="${yearS -2}">${yearS -2}</option>
@@ -44,5 +45,12 @@
                     </ul></li>
             </ul>
         </g:each>
+    <g:javascript>
+        $('.datepicker').datepicker({
+
+            daysOfWeekDisabled: [1,2,3,4,5,6],
+            daysOfWeekHighlighted: [0]
+        });
+    </g:javascript>
     </body>
 </html>

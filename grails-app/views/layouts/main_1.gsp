@@ -14,6 +14,8 @@
         <link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">
     <asset:stylesheet src="application.css"/>
     <asset:javascript src="new_app.js"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js" type="application/javascript" ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker3.standalone.css" type="text/css" />
     <g:layoutHead/>
 </head>
 <body>
@@ -22,7 +24,7 @@
     <a href="${request.contextPath}${securityConfig.logout.afterLogoutUrl}" id="_afterLogout"></a>
 </span>
 <nav class="navbar navbar-expand-lg navbar-dark navbar-static-top" role="navigation">
-    <a class="navbar-brand" href="${request.contextPath}/#"><asset:image src="grails.svg" alt="Grails Logo"/></a>
+    <a class="navbar-brand" href="${request.contextPath}/#">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -69,3 +71,5 @@
             $("#logout").click(logout);
         });
 </script>
+</body>
+</html>

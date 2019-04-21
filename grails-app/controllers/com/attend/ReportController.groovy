@@ -1,13 +1,27 @@
 package com.attend
 import grails.converters.JSON
 import grails.plugin.springsecurity.annotation.Secured
+import java.text.SimpleDateFormat
 
 @Secured(["ROLE_ADMIN"])
 class ReportController {
 
     def index() {
-        def yearf = params.year ?  new GregorianCalendar( params.year.toInteger(),0,1,0,0,0).getTime() :null
-        def endDate = yearf ? new GregorianCalendar( params.year.toInteger(),11,31,23,59,59).getTime() : null
+        def p = params
+        def yearf,endDate
+
+        if(params.week && params.week.toString().trim().size() == 10) {
+            yearf = GregorianCalendar.getInstance()
+            yearf.setTime(new SimpleDateFormat("MM/dd/yyyy").parse(params.week))
+            endDate = yearf
+            yearf = yearf.getTime()
+            endDate.add(Calendar.DAY_OF_MONTH,6)
+            endDate = endDate.getTime()
+        } else {
+            yearf = params.year && params.year != 'all' ?  new GregorianCalendar( params.year.toInteger(),0,1,0,0,0).getTime() :null
+            endDate = yearf ? new GregorianCalendar(params.year.toInteger(),11,31,23,59,59).getTime() : null
+        }
+
         def data = [:]
         def idToName = [:]
         def wts = []
@@ -40,12 +54,23 @@ class ReportController {
         if(yearf instanceof Date) {
             cal.setTime(yearf)
         }
-        render(view:'index',model:[data:data,wts:wts,idToName:idToName,yearS:cal.get(Calendar.YEAR), currYear:params.year])
+        render(view:'index',model:[week:params.week,data:data,wts:wts,idToName:idToName,yearS:cal.get(Calendar.YEAR), currYear:params.year])
     }
 
     def show() {
-        def yearf = params.year ?  new GregorianCalendar( params.year.toInteger(),0,1,0,0,0).getTime() :null
-        def endDate = yearf ? new GregorianCalendar( params.year.toInteger(),11,31,23,59,59).getTime() : null
+        def yearf,endDate
+
+        if(params.week && params.week.toString().trim().size() == 10) {
+            yearf = GregorianCalendar.getInstance()
+            yearf.setTime(new SimpleDateFormat("MM/dd/yyyy").parse(params.week))
+            endDate = yearf
+            yearf = yearf.getTime()
+            endDate.add(Calendar.DAY_OF_MONTH,6)
+            endDate = endDate.getTime()
+        } else {
+            yearf = params.year && params.year != 'all' ?  new GregorianCalendar( params.year.toInteger(),0,1,0,0,0).getTime() :null
+            endDate = yearf ? new GregorianCalendar(params.year.toInteger(),11,31,23,59,59).getTime() : null
+        }
         def emp = Employee.load(params.id)
         def wts = [:]
         def nom_normal = 0
@@ -62,6 +87,7 @@ class ReportController {
                             between('myday',yearf,endDate)
                         }
                     }
+                    order ( 'day', 'desc')
                 }?.each{ s ->
                     data.add(s?.day?.myday)
                     non_normie++
@@ -80,6 +106,7 @@ class ReportController {
                             between('myday',yearf, endDate)
                         }
                     }
+                    order ( 'day', 'desc')
                 }
                 nom_normal = s[0]
             }
@@ -88,6 +115,6 @@ class ReportController {
         if(yearf instanceof Date) {
             cal.setTime(yearf)
         }
-        render(view:'show',model:[wts:wts,emp:emp,nom_normal:nom_normal,non_normie:non_normie,yearS:cal.get(Calendar.YEAR), currYear:params.year])
+        render(view:'show',model:[week:params.week,wts:wts,emp:emp,nom_normal:nom_normal,non_normie:non_normie,yearS:cal.get(Calendar.YEAR), currYear:params.year])
     }
 }

@@ -17,6 +17,7 @@ class Day implements Serializable {
     static mapping = {
         emds cascade: "all-delete-orphan"
         version false
+        sort myday:'desc'
     }
 
     static hasMany=[emds:EmployeeDay]

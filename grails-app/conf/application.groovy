@@ -1,6 +1,8 @@
 String pass = System.getProperty("DB_PASSWORD")?.toString() ?: System.getenv("DB_PASSWORD")?.toString()
 String user = System.getProperty("DB_USER")?.toString()  ?: System.getenv("DB_USER")?.toString()
 String dbString = System.getenv("JDBC_CONNECTION_STRING_ET")?.toString() ?: System.getProperty("JDBC_CONNECTION_STRING_ET")?.toString()
+
+
 dataSource {
     pooled = true
     jmxExport = true
@@ -12,7 +14,7 @@ environments {
     development {
         dataSource {
             password = pass
-            dbCreate = "create-drop"
+            dbCreate = "none"
             username = user
             url= dbString
             dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
@@ -34,7 +36,7 @@ environments {
             username = user
             password = pass
             dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-            url= "jdbc:mysql://localhost:3306/emptrack?useUnicode=yes&characterEncoding=UTF-8&autoReconnect=true&useSSL=false"
+            url= dbString
             properties {
                 jmxEnabled = true
                 initialSize = 5

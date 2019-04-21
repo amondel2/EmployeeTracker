@@ -11,6 +11,7 @@ package com.attend
  * @author aaron
  */
 public enum  WorkType {
-    Normal,HalfAMVacation,HalfPMVacation,VactionPlanned,VacationUnPlanned,Sick,Unkown,
-    IncentiveFull,IncentiveHalf,WAH,WAHAM,WAHPM,LATEWFH,LateNormal,JuryDuty,Bereavement,TwoHourVacation
+    Normal,HalfAMVacation,HalfPMVacation,VactionPlanned,VacationUnPlanned,Sick,Unkown,Sick2Hr,Sick4hour,late2HrPto,late4hrPTO,
+    IncentiveFull,IncentiveHalf,Incentive2hr,WAH,WAHAM,WAHPM,LATEWFH,LateNormal,JuryDuty,Bereavement,TwoHourVacation, LNCares,
+    Training
 }
