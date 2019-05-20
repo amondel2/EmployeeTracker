@@ -5,11 +5,12 @@ import grails.gorm.transactions.Transactional
 @Transactional
 class EmployeeService {
 
-    def createYear(int year) {
+    def hcreateYear(int year) {
         def emps = Employee.list().collect{
             it
         }
         def errors = []
+        def newItems = []
         def date = new GregorianCalendar(year,11,31);
         for(def i=0;i<365;i++) {
             try {
@@ -33,6 +34,7 @@ class EmployeeService {
                         empr.emp = emp
                         try {
                             empr.save(failOnError: true)
+                            newItems.add(empr)
                         } catch (Exception ex) {
                             errors.add(ex.getMessage())
                         }
@@ -40,6 +42,6 @@ class EmployeeService {
                 }
             } catch (Exception e) {}
         }
-        errors
+        [errors: errors, newItems: newItems]
     }
 }

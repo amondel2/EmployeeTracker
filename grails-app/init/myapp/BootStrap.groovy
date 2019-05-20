@@ -41,7 +41,7 @@ class BootStrap {
             }
         } catch(Exception e2) {}
         if(employeeList?.size() > 0 ) {
-            employeeService.createYear(2017)
+            employeeService.createYear(2019)
         }
 
     }
