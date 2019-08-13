@@ -12,10 +12,8 @@ class EmployeeDayController {
 
         withFormat{
             '*' {
-                render   employeeService.createYear(params.year?.toString().toInteger()) as JSON
-    }
-}
-
-
+                render employeeService.createYear(params.year?.toString().toInteger()) as JSON
+            }
+        }
     }
 }
