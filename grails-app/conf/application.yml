@@ -2,7 +2,7 @@
 grails:
     profile: web
     codegen:
-        defaultPackage: myapp
+        defaultPackage: employeetracker
     gorm:
         reactor:
             # Whether to translate GORM events into Reactor events
@@ -14,17 +14,25 @@ info:
         version: '@info.app.version@'
         grailsVersion: '@info.app.grailsVersion@'
 spring:
+    jmx:
+        unique-names: true
     main:
         banner-mode: "off"
     groovy:
         template:
             check-template-location: false
-
-# Spring Actuator Endpoints are Disabled by Default
-endpoints:
-    enabled: false
-    jmx:
-        enabled: true
+    devtools:
+        restart:
+            additional-exclude:
+                - '*.gsp'
+                - '**/*.gsp'
+                - '*.gson'
+                - '**/*.gson'
+                - 'logback.groovy'
+                - '*.properties'
+management:
+    endpoints:
+        enabled-by-default: false
 
 ---
 grails:
@@ -75,17 +83,18 @@ grails:
             htmlcodec: xml
             codecs:
                 expression: html
-                scriptlets: html
+                scriptlet: html
                 taglib: none
                 staticparts: none
-endpoints:
-    jmx:
-        unique-names: true
-
----
+management:
+    endpoints:
+        jmx:
+            unique-names: true
+server:
+    servlet:
+        context-path: /EMT
 hibernate:
     cache:
         queries: false
         use_second_level_cache: false
         use_query_cache: false
-

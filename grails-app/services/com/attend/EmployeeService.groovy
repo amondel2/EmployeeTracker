@@ -1,9 +1,39 @@
 package com.attend
 
 import grails.gorm.transactions.Transactional
+import grails.orm.HibernateCriteriaBuilder
+import org.grails.datastore.mapping.query.api.BuildableCriteria
+import org.hibernate.Criteria
 
 @Transactional
 class EmployeeService {
+
+    def getEmplLst(Date startDate, Date endDate) {
+        BuildableCriteria c = EmployeeDay.createCriteria()
+        c.list{
+            day {
+                between('myday', startDate, endDate)
+            }
+        }
+    }
+
+    def saveEmpDay(result) {
+        def res = []
+        result?.each{k, v ->
+            def emd = EmployeeDay.load(k)
+            def success = true
+            def msg = "SUCCESS"
+            try{
+                emd.type = WorkType[v]
+                emd.save(flush:true,failOnError:true)
+            } catch(Exception e) {
+                success = false
+                msg = e.getMessage()
+            }
+            res.add([success,msg])
+        }
+        res
+    }
 
     def createYear(int year) {
         def emps = Employee.list().collect{

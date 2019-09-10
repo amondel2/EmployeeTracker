@@ -4,5 +4,5 @@
  * and open the template in the editor.
  */
 
-//= require jquery_js
+//= require jquery-3.3.1.min
 //= require attend_index

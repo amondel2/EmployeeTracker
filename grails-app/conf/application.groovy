@@ -6,8 +6,8 @@ String dbString = System.getenv("JDBC_CONNECTION_STRING_ET")?.toString() ?: Syst
 dataSource {
     pooled = true
     jmxExport = true
-    driverClassName = "com.mysql.jdbc.Driver"
-    dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
+    driverClassName = "com.mysql.cj.jdbc.Driver"
+    dialect = "org.hibernate.dialect.MySQL8Dialect"
 }
 
 environments {
@@ -17,7 +17,6 @@ environments {
             dbCreate = "none"
             username = user
             url= dbString
-            dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
         }
     }
     test {
@@ -35,7 +34,6 @@ environments {
             dbCreate = "update"
             username = user
             password = pass
-            dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
             url= dbString
             properties {
                 jmxEnabled = true
@@ -89,5 +87,3 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 	[pattern: '/**/favicon.ico', filters: 'none'],
 	[pattern: '/**',             filters: 'JOINED_FILTERS']
 ]
-
-server.contextPath='/EMT'
